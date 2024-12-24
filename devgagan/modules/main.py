@@ -44,7 +44,7 @@ async def single_link(_, message):
         return    
     freecheck = await chk_user(message, user_id)
     if freecheck == 1 and FREEMIUM_LIMIT == 0 and user_id not in OWNER_ID:
-        await message.reply("Freemium service is currently not available. Upgrade to premium for access.")
+        await message.reply("Freemium service is currently not available. Upgrade to premium for access contact @free_course2_bot.")
         return
     can_proceed, response_message = await check_interval(user_id, freecheck)
     if not can_proceed:
@@ -107,7 +107,7 @@ async def batch_link(_, message):
         )
         return
     if freecheck == 1 and FREEMIUM_LIMIT == 0 and user_id not in OWNER_ID:
-        await message.reply("Freemium service is currently not available. Upgrade to premium for access.")
+        await message.reply("Freemium service is currently not available. Upgrade to premium for access contact @free_course2_bot .")
         return    
     toker = await is_user_verified(user_id)
     if toker:
