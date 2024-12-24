@@ -106,6 +106,9 @@ async def batch_link(_, message):
             "You already have a batch process running. Please wait for it to complete before starting a new one."
         )
         return
+    if freecheck == 1 and FREEMIUM_LIMIT == 0 and user_id not in OWNER_ID:
+        await message.reply("Freemium service is currently not available. Upgrade to premium for access.")
+        return    
     toker = await is_user_verified(user_id)
     if toker:
         max_batch_size = (FREEMIUM_LIMIT + 20)
@@ -116,6 +119,7 @@ async def batch_link(_, message):
             max_batch_size = FREEMIUM_LIMIT
         else:
             max_batch_size = PREMIUM_LIMIT
+    
     while True:
         start = await app.ask(message.chat.id, text="Please send the start link.")
         start_id = start.text.strip()
@@ -138,11 +142,11 @@ async def batch_link(_, message):
     if not can_proceed:
         await message.reply(response_message)
         return
-    join_button = InlineKeyboardButton("Join Channel", url="https://t.me/TARGETALLCOURSE")
+    join_button = InlineKeyboardButton("Join Channel", url="https://t.me/team_spy_pro")
     keyboard = InlineKeyboardMarkup([[join_button]])
     pin_msg = await app.send_message(
         user_id,
-        "Batch process started ⚡\n__Processing: 0/{cl}__\n\n**__Powered by CR CHOUDHARY__**",
+        "Batch process started ⚡\n__Processing: 0/{cl}__\n\n**__Powered by Team SPY__**",
         reply_markup=keyboard
     )
     try:
@@ -163,7 +167,7 @@ async def batch_link(_, message):
                         msg = await app.send_message(message.chat.id, f"Processing link {url}...")
                         await get_msg(None, user_id, msg.id, link, 0, message)
                         await pin_msg.edit_text(
-                        f"Batch process started ⚡\n__Processing: {i - cs + 1}/{cl}__\n\n**__Powered by CR CHOUDHARY__**",
+                        f"Batch process started ⚡\n__Processing: {i - cs + 1}/{cl}__\n\n**__Powered by Team SPY__**",
                         reply_markup=keyboard
                         )
                         await asyncio.sleep(5)
@@ -174,7 +178,7 @@ async def batch_link(_, message):
             await set_interval(user_id, interval_minutes=20)
             await app.send_message(message.chat.id, "Batch completed successfully! 🎉")
             await pin_msg.edit_text(
-                        f"Batch process completed for {cl} messages enjoy 🌝\n\n**__Powered by CR CHOUDHARY_**",
+                        f"Batch process completed for {cl} messages enjoy 🌝\n\n**__Powered by Team SPY__**",
                         reply_markup=keyboard
             )
             return
@@ -212,7 +216,7 @@ async def batch_link(_, message):
                             )
                             await asyncio.sleep(2)
                             await pin_msg.edit_text(
-                            f"Batch process started ⚡\n__Processing: {i - cs + 1}/{cl}__\n\n**__Powered by CR CHOUDHARY__**",
+                            f"Batch process started ⚡\n__Processing: {i - cs + 1}/{cl}__\n\n**__Powered by Team SPY__**",
                             reply_markup=keyboard
                             )
                             await asyncio.sleep(10)
@@ -226,7 +230,7 @@ async def batch_link(_, message):
         await app.send_message(message.chat.id, "Batch completed successfully! 🎉")
         await set_interval(user_id, interval_minutes=20)
         await pin_msg.edit_text(
-                        f"Batch completed for {cl} messages ⚡\n\n**__Powered by CR CHOUDHARY__**",
+                        f"Batch completed for {cl} messages ⚡\n\n**__Powered by Team SPY__**",
                         reply_markup=keyboard
         )
     except FloodWait as fw:
@@ -256,4 +260,4 @@ async def stop_batch(_, message):
         await app.send_message(
             message.chat.id, 
             "No active batch processing is running to cancel."
-        )
+                        )
