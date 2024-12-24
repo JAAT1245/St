@@ -1,1 +1,1 @@
-worker: python -m devgagan
+worker: python3.9 -m devgagan
