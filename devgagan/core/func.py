@@ -39,7 +39,7 @@ async def subscribe(app, message):
             await message.reply_text("You are Banned. Contact -- @devgaganin")
             return 1
       except UserNotParticipant:
-         await message.reply_photo(photo="https://graph.org/file/d44f024a08ded19452152.jpg",caption=script.FORCE_MSG.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Now...", url=f"{url}")]]))
+         await message.reply_photo(photo="https://iili.io/2h2achb.md.jpg",caption=script.FORCE_MSG.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Now...", url=f"{url}")]]))
          return 1
       except Exception:
          await message.reply_text("Something Went Wrong. Contact us @devgaganin...")
@@ -277,7 +277,7 @@ async def progress_callback(current, total, progress_message):
     f"│ **__Progress:__** {percent:.2f}%\n"
     f"│ **__Uploaded:__** {current_mb:.2f} MB / {total_mb:.2f} MB\n"
     f"╰──────────────────╯\n\n"
-    f"**__Powered by Team SPY__**"
+    f"**__Powered by CR CHOUDHARY_**"
         )
         
         last_update_time = current_time
